@@ -1,27 +1,25 @@
-// Función para encriptar el texto ingresado por el usuario
+
 function encriptar() {
     // Obtener el texto del input
     let texto = document.getElementById('texto').value;
     // Verificar si el texto está vacío
     if (texto.trim() === '') {
-        // Mostrar la imagen en lugar del texto encriptado
+    
         mostrarImagen();
         return;
     }
 
+    // Verificar si el texto contiene mayúsculas o caracteres especiales
+    let contieneCaracteresNoPermitidos = /[A-Z!@#$%^&*()_+={}[\]\\|:;"'<,>.?/~]/.test(texto);
+    if (contieneCaracteresNoPermitidos) {
+        // Mostrar un mensaje de error si el texto contiene caracteres no permitidos
+        mostrarError('El texto no puede contener mayúsculas ni caracteres especiales.');
+        return;
+    } 
+
     let resultado = '';
 
-    // Verificar si el texto contiene caracteres especiales, mayúsculas o acentos
-    let contieneCaracteresEspeciales = /[^a-z\s]/i.test(texto);
-    if (contieneCaracteresEspeciales) {
-        // Mostrar un mensaje de error si el texto contiene caracteres no permitidos
-        mostrarError('El texto no puede contener caracteres especiales, mayúsculas ni acentos.');
-        return;
-    } else {
-        mostrarError('');
-    }
-
-    // Reemplazar las letras según la encriptación definida
+    // Reemplazar las letras según la encriptación del desafio
     resultado = texto.replace(/e/g, 'enter')
         .replace(/i/g, 'imes')
         .replace(/a/g, 'ai')
@@ -34,26 +32,24 @@ function encriptar() {
 
 // Función para desencriptar el texto ingresado por el usuario
 function desencriptar() {
-    // Obtener el texto del input
+
     let texto = document.getElementById('texto').value;
-    // Verificar si el texto está vacío
+
     if (texto.trim() === '') {
         // Mostrar la imagen en lugar del texto encriptado
         mostrarImagen();
         return;
     }
 
-    let resultado = '';
-
-    // Verificar si el texto contiene caracteres especiales, mayúsculas o acentos
-    let contieneCaracteresEspeciales = /[^a-z\s]/i.test(texto);
-    if (contieneCaracteresEspeciales) {
+    // Verificar si el texto contiene mayúsculas o caracteres especiales
+    let contieneCaracteresNoPermitidos = /[A-Z!@#$%^&*()_+={}[\]\\|:;"'<,>.?/~]/.test(texto);
+    if (contieneCaracteresNoPermitidos) {
         // Mostrar un mensaje de error si el texto contiene caracteres no permitidos
-        mostrarError('El texto no puede contener caracteres especiales, mayúsculas ni acentos.');
+        mostrarError('El texto no puede contener mayúsculas ni caracteres especiales.');
         return;
-    } else {
-        mostrarError('');
-    }
+    } 
+
+    let resultado = '';
 
     // Reemplazar las palabras encriptadas por sus equivalentes originales
     resultado = texto.replace(/enter/g, 'e')
